@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"  
+    "http://struts.apache.org/dtds/struts-2.0.dtd">  
+  
+<struts>  
+<package name="sayhello" namespace="/" extends="struts-default">  
+        
+        <!-- 起始页到图书页 -->
+        <action name="toBook">  
+            <result>book.jsp</result>
+        </action>
+        
+        <!-- 起始页到作者页 -->
+        <action name="toAuthor">   
+            <result>author.jsp</result>
+        </action>
+        
+        <!-- 获得图书全部信息，到书单列表 -->
+        <action name="toBookList" class="data_action.connect" method="booklist">  
+            <result name="FAIL">hello1.jsp</result>
+            <result name="SUCCESS">bookpage.jsp</result>
+        </action>   
+        
+        
+        <!-- 由书名（isbn）到书完整信息和对应作者信息 -->
+        <!-- output book+author information   -->   
+        <action name="bookinformation" class="data_action.connect" method="bookinformation">  
+            <result name="FAIL">hello1.jsp</result>
+            <result name="SUCCESS">bookinformation.jsp</result>
+        </action>
+        
+        <!-- 查询作者全部图书 -->
+        <action name="SearchAuthor" class="data_action.searchauthor" method="SearchBook">  
+            <result name="FAIL">hello1.jsp</result>
+            <result name="SUCCESS">authorinformation.jsp</result>
+        </action>
+        
+        <!-- 删除信息 -->
+        <action name="Delete" class="data_action.delete" method="delete" >  
+            <result name="FAIL">hello1.jsp</result>
+            <result name="SUCCESS" >book.jsp</result>
+        </action>
+        
+        <!-- 转到更新页面，同时准备好图书作者信息 -->
+        <action name="ToUpdate" class="data_action.ToUpdate" method="ToUpdate">
+        <result name ="FAIL">hello1.jsp</result>
+            <result name = "SUCCESS">UpdateBookPage.jsp</result>
+        </action>
+        
+        <!-- 更新数据库的图书及对应作者信息后 转到 图书页面 -->
+        <action name="UpdateBook" class="data_action.update" method="Update">
+        <result name ="FAIL">hello1.jsp</result>
+            <result name = "SUCCESS">book.jsp</result>
+        </action>
+        
+        <!-- 转到添加书 详细信息 页面 -->
+        <action name="toAddBook">
+        <result>addBookPage.jsp</result>
+        </action>
+        
+        <!-- 向数据库添加 图书及作者信息 -->
+        <action name="AddBook" class="data_action.insertBook" method="insertBook">
+        <result name="SUCCESS">book.jsp</result>
+        </action>
+</package>
+<!-- 
+    <package name="sayhello" namespace="/" extends="struts-default">  
+        <action name="toBook" class="sayhello.HelloWorld" method="ein">  
+            <result name="SUCCESS">hello2.jsp</result>
+            <result name="FAIL">hello1.jsp</result>
+        </action>       
+        <action name="asd" class="sayhello.HelloWorld" method="asd">  
+            <result name="asd">hello1.jsp</result>
+        </action>  
+        <action name="Update" >
+            <result>hello3.jsp</result>  
+        </action>
+    </package>   -->
+</struts>
